@@ -9,7 +9,7 @@ int main()
 
 	std::cout << "enter long number" << std::endl;
 	std::cin >> num;
-	std::cout << longtoah(num, m);
+	std::cout << ltoab(num, m) << std::endl;
 
 
 	return 0;
