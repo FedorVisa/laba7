@@ -4,12 +4,10 @@
 
 int main()
 {
-	long num;
-	char  m[256] = {};
+	std::string m = "123.456456";
 
-	std::cout << "enter long number" << std::endl;
-	std::cin >> num;
-	std::cout << ltoab(num, m) << std::endl;
+	std::cout << "enter number" << std::endl;
+	std::cout << strtodo(m) << std::endl;
 
 
 	return 0;

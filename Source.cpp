@@ -1,60 +1,43 @@
 #include "longtohex.h"
 #include <string>
 #include <cmath>
-const char* hex = "0123456789ABCDEF";
+using namespace std;
 
-void swap(char* c) {
-	char tmp;
-	int j = strlen(c)-1;
-	for (int i = 0; i < j; ++i, --j) {
-		tmp = c[i];
-		c[i] = c[j];
-		c[j] = tmp;
+double strtodo(string b) {
+	int dot = 0;
+	double num = 1;
+	int cinum=0;
+	bool minus = false;
+	double end=0;
+	for (int i = 0; i < b.size(); ++i) {
+		if (b[i] == '.')  dot++; 
+		if (dot>1 || b[0] == '.')return 0;
 	}
+
+	int str_ln = 0;
+	for (int i = b.size() - 1; i >= 0 && b[i] != '.'; --i)str_ln++;
+
+	if (dot>0) {
+		for (int i = 0; i < str_ln; i++)num /= 10;
+	}
+	 for (int i = b.size() - 1; i >= 0; --i,num*=10) {	
+		if (b[0] == '-') {
+			minus = true;
+			break;
+		}
+		else if (b[i] == '.') {
+			num /= 10;
+			continue;
+		}
+		else if ((b[i] >= '1') && (b[i] <= '9')) cinum = b[i] - '0';
+		else return 0;
+
+	end += (cinum * num);
+	}
+	if (minus == true)return -end;
+	else return end;
+
 }
 
 
-char* longtoah(long num, char* c) {
-	if(num<0){	
-	}
-	 for (int i = 0;; ++i) {
-		int a = num % 16;
-		c[i] = hex[a];
-		num /= 16;
-		if (!num)break;
-	}
-	swap(c);
-	return c;
-}
-
-char* ltoab(long num, char* c) {
-	char s[256] = {};
-	for (int i = 0; i < (sizeof(num) * 8); ++i) {
-		if ((num & 1 << (sizeof(num) * 8 - i - 1)) != 0) {
-			c[i] = '1';
-		}
-		else {
-			c[i] = '0';
-		}
-	}
-	int n = 0;
-	swap(c);
-		for (int i = 0; i < (sizeof(num) * 8); i+=4) {
-			int f = 0;
-			for (int j = 0; j <4; j++) {
-				int a = 0;
-				int in = c[i + j] - '0';
-				a = in * pow(2, j);
-				f +=a;
-			}
-			s[n] = hex[f];
-			n++;
-		
-		}
-		swap(s);
-		for (int i = 0; i < (sizeof(num) * 8); ++i) {
-			c[i] = s[i];
-		}
-	return c;
-}
 

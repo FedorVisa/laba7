@@ -1,3 +1,3 @@
-
-char* longtoah(long num, char* c);
-char* ltoab(long num, char* c);
+#include<string>
+#pragma once
+double strtodo(std::string b);
